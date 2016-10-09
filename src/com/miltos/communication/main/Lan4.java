@@ -24,16 +24,16 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 	/*
 	 * Definition of the app's fields
 	 */
-	static TextField inputTextField;			// The TextField used for writing the new message
-	static JTextArea textArea;					// The TextArea where the sent and received messages are printed 
-	static JFrame frame;						// The Frame that implements the app's GUI 
-	static JButton sendButton;				    // The Button for sending the text written in the TextField 
-	static JTextField meesageTextField;			// The TextField used for writing the new message  
+	static TextField inputTextField;		// The TextField used for writing the new message
+	static JTextArea textArea;			// The TextArea where the sent and received messages are printed 
+	static JFrame frame;				// The Frame that implements the app's GUI 
+	static JButton sendButton;			// The Button for sending the text written in the TextField 
+	static JTextField meesageTextField;		// The TextField used for writing the new message  
 	static DatagramSocket receivingSocket;		// The Socket for receiving UDP Text Packets 
-	public static Color gray;					// The Color of the Frame 
-	final static String newline="\n";			// A static variable that is used for changing line in TextArea 
-	static JButton callButton;					// The Button for enabling and disabling Voip Calls
-	static int flag = 0;						// A flag that indicates if the call button was previously pressed 		
+	public static Color gray;			// The Color of the Frame 
+	final static String newline="\n";		// A static variable that is used for changing line in TextArea 
+	static JButton callButton;			// The Button for enabling and disabling Voip Calls
+	static int flag = 0;				// A flag that indicates if the call button was previously pressed 		
 	
 	
 	/*
@@ -42,10 +42,10 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 	static int messagesRecPort = 48011;
 	static int messagesSenPort = 38011;
 	
-	static byte[] remoteIP= { (byte)192,(byte)168,(byte)1,(byte)84 };
+	static byte[] remoteIP= { (byte) 192, (byte) 168, (byte)1, (byte) 84 };
 	
 	/**
-	 * Construct the app's frame and initialize important parameters
+	 * Construct the app's frame and initialize important parameters.
 	 */
 	public Lan4(String title) {
 		
@@ -73,8 +73,7 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 		//Setting up the buttons.
 		sendButton=new JButton("Send");			
 		callButton=new JButton("Call");			
-					
-		
+						
 		/*
 		 * 2. Adding the components to the GUI.
 		 */
@@ -93,8 +92,7 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 		 * 4. Create a socket for receiving messages.  
 		 */
 		try{		
-			receivingSocket=new DatagramSocket(messagesRecPort);
-			
+			receivingSocket=new DatagramSocket(messagesRecPort);			
 		}catch(SocketException ec){
 			System.out.println(ec);	
 		}			
@@ -114,7 +112,7 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 		lan4.setVisible(true);				  
 	
 		/*
-		 * 2. Create the receiving packet
+		 * 2. Create the receiving packet.
 		 */
 		byte[] rxBuffer = new byte[256];  
 		DatagramPacket receivedPacket = new DatagramPacket(rxBuffer, rxBuffer.length); 
@@ -122,10 +120,8 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 		/*
 		 * 3. Listening Phase - Continuously listen for new messages.
 		 */
-		do{
-			
-			try{
-				
+		do{		
+			try{	
 				//TODO: Remove this print.
 				System.out.println("receive"); 
 				Toolkit.getDefaultToolkit().beep();				
@@ -142,17 +138,15 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 				textArea.append("away: "+ message + newline);		
 				
 			}catch (Exception e){							
-					System.out.println(e);
-			}
-			
+				System.out.println(e);
+			}	
 		}while(true);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		try {
-			
+		try {	
 			/*
 			 * 1. Create the receiving and sending sockets.
 			 */
@@ -186,7 +180,7 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 				 */
 				try {
 					
-					//Construct a packet containing this message
+					//Construct a packet containing this message.
 					remoteAddress = InetAddress.getByAddress(remoteIP);
 					DatagramPacket sendingPacket = new DatagramPacket(txBuffer, txBuffer.length, remoteAddress, messagesSenPort);	
 					
@@ -239,45 +233,38 @@ public class Lan4 extends Frame implements WindowListener, ActionListener {
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
 		dispose();
-        System.exit(0);
+        	System.exit(0);
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 }
